@@ -12,7 +12,12 @@ from keras.optimizers import Adam
 from keras.preprocessing.image import ImageDataGenerator
 from keras.utils import np_utils
 
-from resnext import ResNeXt
+#from resnext import ResNeXt #original
+from resnext import ResNext #edited
+"""
+to `ImportError: cannot import name 'ResNeXt' from 'resnext'` error make it
+ResNeXt to ResNext
+"""
 
 batch_size = 100
 nb_classes = 10
@@ -21,12 +26,21 @@ nb_epoch = 100
 img_rows, img_cols = 32, 32
 img_channels = 3
 
-img_dim = (img_channels, img_rows, img_cols) if K.image_dim_ordering() == "th" else (img_rows, img_cols, img_channels)
+#img_dim = (img_channels, img_rows, img_cols) if K.image_dim_ordering() == "th" else (img_rows, img_cols, img_channels) #original
+img_dim = (img_channels, img_rows, img_cols) if K.common.image_dim_ordering() == "th" else (img_rows, img_cols, img_channels) #edited
+"""
+to `AttributeError: module 'keras.backend' has no attribute 'image_dim_ordering'` error make it 
+K.image_dim_ordering() to K.common.image_dim_ordering()
+"""
 depth = 29
 cardinality = 8
 width = 16
 
-model = ResNeXt(img_dim, depth=depth, cardinality=cardinality, width=width, weights=None, classes=nb_classes)
+#model = ResNeXt(img_dim, depth=depth, cardinality=cardinality, width=width, weights=None, classes=nb_classes) #original
+model = ResNext(img_dim, depth=depth, cardinality=cardinality, width=width, weights=None, classes=nb_classes) #edited
+"""
+to `NameError: name 'ResNeXt' is not defined` error change it to ResNeXt to ResNext 
+"""
 print("Model created")
 
 model.summary()
