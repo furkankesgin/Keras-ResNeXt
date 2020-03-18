@@ -26,7 +26,11 @@ depth = 29
 cardinality = 8
 width = 16
 
-model = ResNeXt(img_dim, depth=depth, cardinality=cardinality, width=width, weights=None, classes=nb_classes)
+#model = ResNeXt(img_dim, depth=depth, cardinality=cardinality, width=width, weights=None, classes=nb_classes) #original
+model = ResNext(img_dim, depth=depth, cardinality=cardinality, width=width, weights=None, classes=nb_classes) #edited
+"""
+to `NameError: name 'ResNeXt' is not defined` error change it to ResNeXt to ResNext 
+"""
 print("Model created")
 
 model.summary()
